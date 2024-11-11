@@ -1,9 +1,9 @@
 
 import { useUser } from "@clerk/clerk-expo";
-import { FlatList } from "react-native";
+import { FlatList, View, Text, Image, ActivityIndicator, TouchableOpacity } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import RideCard from "@/components/RideCard";
-
+import { icons, images } from "@/constants";
 const recentRides = [
   {
       "ride_id": "1",
@@ -104,13 +104,53 @@ const recentRides = [
 ]; // This appears to be a placeholder array with 4 elements
 
 export default function Page() {
-  const { } = useUser();
+  const { user} = useUser();
+  const loading = true;
+  const handleSignOut = () => {
 
+  }
   return (
     <SafeAreaView className="bg-general-500">
       <FlatList
+        // data={[]}
         data={recentRides?.slice(0, 5)}
         renderItem={({ item }) => <RideCard ride={item} />}
+        className = "px-5"
+        keyboardShouldPersistTaps="handled"
+        contentContainerStyle={{
+          paddingBottom: 100,
+        }}
+        ListEmptyComponent={()=>(
+          <View className="flex flex-col items-center justify-center">
+            {!loading ? (
+              <>
+                <Image source={images.noResult}
+                  className="w-40 h-40" alt="no recent rides found"
+                  resizeMode="contain"
+                />
+
+                <Text className="text-sm">No Recent Rides found</Text>
+              </>
+            ) : 
+              <ActivityIndicator size="small" color="#000"/>
+            }
+          </View>
+        )}
+        ListHeaderComponent={()=>(
+          <>
+            <View className="flex flex-row items-center justify-between my-5">
+              <Text className="text-xl font-JakartaExtraBold">Welcome{", "} {user?.firstName || user?.emailAddresses[0].emailAddress.split('@')[0]}{" "}
+                👋🏽
+              </Text>
+              <TouchableOpacity onPress={handleSignOut} className="justify-center items-center bg-white w-10 h-10">
+                <Image source={icons.out}
+                  className="w-4 h-5"
+                />
+              </TouchableOpacity>
+            </View>
+            {/* GoogleTextInput */}
+          </>
+        )}
       />
     </SafeAreaView>
   );
