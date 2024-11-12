@@ -1,24 +1,37 @@
 // polyfills.ts
+import { Buffer } from '@craftzdog/react-native-buffer';
 import 'react-native-get-random-values';
 
-if (typeof global.Buffer === 'undefined') {
-  global.Buffer = require('buffer/').Buffer;
-}
+// Register required globals without modifying metro config
+const globals = {
+  Buffer: Buffer,
+  process: {
+    ...require('process'),
+    version: 'v9.40',
+    env: {
+      ...process.env,
+      NODE_ENV: __DEV__ ? 'development' : 'production',
+    },
+  },
+  stream: require('@craftzdog/react-native-buffer'),
+  StringDecoder: require('@craftzdog/react-native-buffer').StringDecoder,
+  Transform: require('@craftzdog/react-native-buffer').Transform,
+  events: require('events'),
+};
 
-if (typeof global.process === 'undefined') {
-  global.process = require('process');
-}
+// Safely assign globals
+Object.entries(globals).forEach(([key, value]) => {
+  if (typeof global[key] === 'undefined') {
+    global[key] = value;
+  }
+});
 
-if (typeof global.crypto !== 'object') {
-  global.crypto = require('crypto-browserify');
-}
-
-// Polyfill stream
-if (typeof global.stream === 'undefined') {
-  global.stream = require('stream-browserify');
-}
-
-// Polyfill events
-if (typeof global.events === 'undefined') {
-  global.events = require('events');
+// Ensure Clerk has access to required modules
+if (!global.crypto) {
+  Object.defineProperty(global, 'crypto', {
+    enumerable: true,
+    configurable: true,
+    writable: true,
+    value: require('react-native-quick-crypto'),
+  });
 }
