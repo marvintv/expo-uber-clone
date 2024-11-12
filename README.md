@@ -101,3 +101,20 @@ EXPO_PUBLIC_GEOAPIFY_API_KEY=
 EXPO_PUBLIC_STRIPE_PUBLISHABLE_KEY=
 STRIPE_SECRET_KEY=
 ```
+
+Replace the placeholder values with your actual Clerk, Stripe, NeonDB, Google Maps, andgeoapify credentials. You can
+obtain these credentials by signing up on
+the [Clerk](https://clerk.com/), [Stripe](https://stripe.com/in), [NeonDB](https://neon.tech/), [Google Maps](https://console.cloud.google.com/)
+and [geoapify](https://www.geoapify.com/) websites respectively.
+
+**Running the Project**
+
+```bash
+npx expo start
+```
+
+Download the [Expo Go](https://expo.dev/go) app and Scan the QR code on your respective device to view the project.
+
+## <a name="snippets">🕸️ Snippets</a>
+
+Here are some code snippets from the project to help you get started quickly.
