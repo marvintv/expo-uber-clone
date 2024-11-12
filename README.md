@@ -113,6 +113,3 @@ npx expo start
 
 Download the [Expo Go](https://expo.dev/go) app and Scan the QR code on your respective device to view the project.
 
-## <a name="snippets">🕸️ Snippets</a>
-
-Here are some code snippets from the project to help you get started quickly.
