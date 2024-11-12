@@ -52,8 +52,6 @@
 
 👉 **Create Rides After Successful Payment**: Book a ride after confirming payment.
 
-👉 **Profile**: Manage account details in the profile screen.
-
 👉 **History**: Review all rides booked so far.
 
 👉 **Responsive on Android and iOS**: Optimized for both Android and iOS devices.
