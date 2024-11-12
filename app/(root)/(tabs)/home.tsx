@@ -2,6 +2,7 @@
 import { useUser } from "@clerk/clerk-expo";
 import { FlatList, View, Text, Image, ActivityIndicator, TouchableOpacity } from "react-native";
 import { useEffect, useState } from "react";
+import { router } from "expo-router";
 import { SafeAreaView } from "react-native-safe-area-context";
 import RideCard from "@/components/RideCard";
 import { icons, images } from "@/constants";
@@ -118,10 +119,15 @@ export default function Page() {
   const handleSignOut = () => {
 
   }
-  const handleDestinationPress = () => {
+  const handleDestinationPress = (location: {
+    latitude: number;
+    longitude: number;
+    address: string;
+  }) => {
+    setDestinationLocation(location);
 
-  }
-
+    router.push("/(root)/find-ride");
+  };
 
   useEffect(() => {
     const requestLocation = async () => {

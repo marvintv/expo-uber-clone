@@ -15,8 +15,9 @@ const FindRide = () => {
     setUserLocation,
   } = useLocationStore();
 
+
   return (
-    <RideLayout title="Ride">
+    <RideLayout title="Ride" snapPoints={["85%"]}>
       <View className="my-3">
         <Text className="text-lg font-JakartaSemiBold mb-3">From</Text>
 
@@ -41,13 +42,15 @@ const FindRide = () => {
         />
       </View>
 
+
       <CustomButton
         title="Find Now"
         onPress={() => router.push(`/(root)/confirm-ride`)}
         className="mt-5"
       />
+
     </RideLayout>
-  );
+  ); 
 };
 
 export default FindRide;
